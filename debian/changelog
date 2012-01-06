@@ -1,0 +1,16 @@
+openssl (1.0.0e-6) unstable; urgency=low
+
+  * 11/12/21
+  *  - remove unnecessary file - debian/copyright
+  * Git: unmodified/openssl
+  * Tag: openssl_1.0.0e-6
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 21 Dec 2011 11:35:28 +0900
+
+openssl (1.0.0e-5) unstable; urgency=low
+
+  * changelog update
+  * Git: unmodified/openssl
+  * Tag: openssl_1.0.0e-5
+
+ -- Howon Jung <howon.jung@samsung.com>  Tue, 22 Nov 2011 19:12:35 +0900
