@@ -1,8 +1,8 @@
-%define soversion 0.9.8
+%define soversion 1.0.0
 
 Summary: A general purpose cryptography library with TLS implementation
 Name: openssl
-Version: 0.9.8r
+Version: 1.0.0f
 Release: 1
 
 Source: openssl-%{version}.tar.gz

@@ -4,18 +4,18 @@
 ## Makefile for OpenSSL
 ##
 
-VERSION=1.0.0e
+VERSION=1.0.0f
 MAJOR=1
 MINOR=0.0
 SHLIB_VERSION_NUMBER=1.0.0
 SHLIB_VERSION_HISTORY=
 SHLIB_MAJOR=1
 SHLIB_MINOR=0.0
-SHLIB_EXT=
-PLATFORM=dist
-OPTIONS= no-gmp no-jpake no-krb5 no-md2 no-rc5 no-rfc3779 no-shared no-store no-zlib no-zlib-dynamic static-engine
-CONFIGURE_ARGS=dist
-SHLIB_TARGET=
+SHLIB_EXT=.so.$(SHLIB_MAJOR).$(SHLIB_MINOR)
+PLATFORM=linux-generic32
+OPTIONS=enable-shared --prefix=/usr --install-prefix=/home/kidong/work/SLP/PKGS_PRIVATE/OPENSSL/openssl_0120/debian/tmp -ldl enable-md2 no-asm no-camellia no-gmp no-idea no-jpake no-krb5 no-rc5 no-rfc3779 no-store no-zlib no-zlib-dynamic no-static-engine
+CONFIGURE_ARGS=shared --prefix=/usr --install-prefix=/home/kidong/work/SLP/PKGS_PRIVATE/OPENSSL/openssl_0120/debian/tmp linux-generic32 -ldl no-asm no-idea no-camellia enable-md2
+SHLIB_TARGET=linux-shared
 
 # HERE indicates where this Makefile lives.  This can be used to indicate
 # where sub-Makefiles are expected to be.  Currently has very limited usage,
@@ -25,11 +25,11 @@ HERE=.
 # INSTALL_PREFIX is for package builders so that they can configure
 # for, say, /usr/ and yet have everything installed to /tmp/somedir/usr/.
 # Normally it is left empty.
-INSTALL_PREFIX=
-INSTALLTOP=/usr/local/ssl
+INSTALL_PREFIX=/home/kidong/work/SLP/PKGS_PRIVATE/OPENSSL/openssl_0120/debian/tmp
+INSTALLTOP=/usr
 
 # Do not edit this manually. Use Configure --openssldir=DIR do change this!
-OPENSSLDIR=/usr/local/ssl
+OPENSSLDIR=/usr/ssl
 
 # NO_IDEA - Define to build without the IDEA algorithm
 # NO_RC4  - Define to build without the RC4 algorithm
@@ -59,11 +59,11 @@ OPENSSLDIR=/usr/local/ssl
 # equal 4.
 # PKCS1_CHECK - pkcs1 tests.
 
-CC= cc
-CFLAG= -O
-DEPFLAG= -DOPENSSL_NO_GMP -DOPENSSL_NO_JPAKE -DOPENSSL_NO_MD2 -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_STORE
+CC= gcc
+CFLAG= -fPIC -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -DTERMIO -O3 -fomit-frame-pointer -Wall
+DEPFLAG= -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_GMP -DOPENSSL_NO_IDEA -DOPENSSL_NO_JPAKE -DOPENSSL_NO_RC5 -DOPENSSL_NO_RFC3779 -DOPENSSL_NO_STORE
 PEX_LIBS= 
-EX_LIBS= 
+EX_LIBS= -ldl -ldl
 EXE_EXT= 
 ARFLAGS= 
 AR= ar $(ARFLAGS) r
@@ -72,7 +72,7 @@ NM= nm
 PERL= /usr/bin/perl
 TAR= tar
 TARFLAGS= --no-recursion
-MAKEDEPPROG=makedepend
+MAKEDEPPROG= gcc
 LIBDIR=lib
 
 # We let the C compiler driver to take care of .s files. This is done in
@@ -101,7 +101,7 @@ SHA1_ASM_OBJ=
 RMD160_ASM_OBJ= 
 WP_ASM_OBJ= wp_block.o
 CMLL_ENC= camellia.o cmll_misc.o cmll_cbc.o
-PERLASM_SCHEME= 
+PERLASM_SCHEME= void
 
 # KRB5 stuff
 KRB5_INCLUDES=
@@ -118,8 +118,8 @@ SHLIBDIRS= crypto ssl
 # dirs in crypto to build
 SDIRS=  \
 	objects \
-	md4 md5 sha mdc2 hmac ripemd whrlpool \
-	des aes rc2 rc4 idea bf cast camellia seed modes \
+	md2 md4 md5 sha mdc2 hmac ripemd whrlpool \
+	des aes rc2 rc4 bf cast seed modes \
 	bn ec rsa dsa ecdsa dh ecdh dso engine \
 	buffer bio stack lhash rand err \
 	evp asn1 pem x509 x509v3 conf txt_db pkcs7 pkcs12 comp ocsp ui krb5 \
@@ -148,8 +148,8 @@ WDIRS=  windows
 LIBS=   libcrypto.a libssl.a
 SHARED_CRYPTO=libcrypto$(SHLIB_EXT)
 SHARED_SSL=libssl$(SHLIB_EXT)
-SHARED_LIBS=
-SHARED_LIBS_LINK_EXTS=
+SHARED_LIBS=$(SHARED_CRYPTO) $(SHARED_SSL)
+SHARED_LIBS_LINK_EXTS=.so.$(SHLIB_MAJOR) .so
 SHARED_LDFLAGS=
 
 GENERAL=        Makefile

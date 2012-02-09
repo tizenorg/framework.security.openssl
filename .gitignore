@@ -2,8 +2,6 @@
 *.a
 *.so
 build-stamp
-config.sub
-config.guess
 libcrypto.pc
 libcrypto.so.0.9.8
 libssl.pc

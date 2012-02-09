@@ -27,7 +27,7 @@ endif
 config.status: Configure
 	dh_testdir
 	# Add here commands to configure the package.
-	./Configure shared --prefix=/usr --install-prefix=$(CURDIR)/debian/tmp linux-generic32 -ldl -no-asm enable-md2
+	./Configure shared --prefix=/usr --install-prefix=$(CURDIR)/debian/tmp linux-generic32 -ldl no-asm no-idea no-camellia enable-md2
 
 build: build-stamp
 
