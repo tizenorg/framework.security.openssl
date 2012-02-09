@@ -1,7 +1,7 @@
 openssl (1.0.0f-2) unstable; urgency=low
 
   * exclude rc5, idea and camellia because of patent issue
-  * Git: slp/unmodified/openssl
+  * Git: unmodified/openssl
   * Tag: openssl_1.0.0f-2
 
  -- Kidong Kim <kd0228.kim@samsung.com>  Thu, 09 Feb 2012 17:54:12 +0900
