@@ -6,6 +6,7 @@ Version: 1.0.0f
 Release: 1
 
 Source: openssl-%{version}.tar.gz
+Source1001: packaging/openssl.manifest
 
 License: OpenSSL
 Group: System/Libraries
@@ -34,7 +35,7 @@ support various cryptographic algorithms and protocols.
 %setup -q
 
 %build 
-
+cp %{SOURCE1001} .
 # ia64, x86_64, ppc, ppc64 are OK by default
 # Configure the build tree.  Override OpenSSL defaults with known-good defaults
 # usable on all platforms.  The Configure script already knows to use -fPIC and
@@ -60,6 +61,7 @@ rm -rf %{buildroot}/usr/ssl/misc/CA.pl
 %postun -p /sbin/ldconfig
 
 %files 
+%manifest openssl.manifest
 %{_prefix}/bin
 %{_prefix}/ssl
 %{_libdir}/engines/*.so
@@ -67,6 +69,7 @@ rm -rf %{buildroot}/usr/ssl/misc/CA.pl
 %{_libdir}/libssl.so.%{soversion}
 
 %files devel
+%manifest openssl.manifest
 /usr/include/openssl/*
 %attr(0755,root,root) %{_libdir}/*.so
 %attr(0644,root,root) %{_libdir}/pkgconfig/*.pc
