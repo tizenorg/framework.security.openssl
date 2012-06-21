@@ -1,0 +1,21 @@
+* Thu Jun 21 2012 Anas Nashif <anas.nashif@intel.com> e56f102
+- fixed requirements
+
+* Fri May 25 2012 Ryan Ware <ryan.r.ware@intel.com> 97b56ca
+- Add default Smack manifest for openssl.spec
+
+* Sun Apr 29 2012 Kim Kibum <kb0929.kim@samsung.com> e06705f
+- upload tizen1.0 source
+
+* Wed Mar 14 2012 Yan Yin <yan.yin@intel.com> 8a630c2
+- update for beta universally
+
+* Thu Feb 09 2012 Kidong Kim <kd0228.kim@samsung.com> 9fa1c82
+- fix git path
+- openssl version-up and solve patent issues
+
+* Fri Jan 06 2012 Kibum Kim <kb0929.kim@samsung.com> 7efbd22
+- Git init
+[ Eunkyoung Kim ]
+- Initial empty repository
+
