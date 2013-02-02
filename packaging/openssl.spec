@@ -10,7 +10,7 @@ Source: openssl-%{version}.tar.gz
 License: OpenSSL
 Group: System/Libraries
 URL: http://www.openssl.org/
-BuildRequires: mktemp, sed, zlib-devel, util-linux
+BuildRequires: mktemp, sed, zlib-devel, util-linux-ng
 Requires: /bin/mktemp
 
 %description

@@ -1,0 +1,4 @@
+* Sat Feb  2 01:59:09 UTC 2013 - tracy.graydon@intel.com
+- Fix util-linux-ng dependency for 2.0alpha (to fix arm builds)
+- Add the openssl.changes file 
+
