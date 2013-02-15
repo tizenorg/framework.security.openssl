@@ -1,0 +1,7 @@
+openssl (1.0.0f-1) unstable; urgency=low
+
+  * update version - fix some security vulnerabilities
+  * Git: framework/securityopenssl
+  * Tag: openssl_1.0.0f-1
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 10 Jan 2012 15:15:59 +0900
