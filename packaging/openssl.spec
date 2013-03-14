@@ -40,20 +40,19 @@ cp %{SOURCE1001} .
 # usable on all platforms.  The Configure script already knows to use -fPIC and
 # RPM_OPT_FLAGS, so we can skip specifiying them here.
 ./Configure shared \
-	--prefix=%{_prefix} --install-prefix=%{buildroot} linux-generic32 -ldl no-asm no-idea no-camellia enable-md2
+	--prefix=%{_prefix} --install-prefix=$RPM_BUILD_ROOT linux-generic32 -ldl -no-asm enable-md2 no-idea no-camellia no-rc5
 
 make depend
 make all
 
 %install
-
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 # Install OpenSSL.
-make INSTALL_PREFIX=%{buildroot} install
+make INSTALL_PREFIX=$RPM_BUILD_ROOT install
+rm -rf %{buildroot}/usr/ssl/man
 
-rm -rf %{buildroot}%{_prefix}/ssl/man
-rm -rf %{buildroot}%{_prefix}/ssl/misc/*.pl
-rm -rf %{buildroot}%{_prefix}/ssl/misc/tsget
-rm -rf %{buildroot}%{_bindir}/c_rehash
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
@@ -62,7 +61,7 @@ rm -rf %{buildroot}%{_bindir}/c_rehash
 %files
 %manifest openssl.manifest
 %defattr(-,root,root,-)
-%{_bindir}/*
+%{_prefix}/bin/openssl
 %{_prefix}/ssl
 %{_libdir}/engines/*.so
 %{_libdir}/libcrypto.so.%{soversion}
