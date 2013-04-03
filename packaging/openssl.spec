@@ -60,7 +60,7 @@ rm -rf %{buildroot}/usr/ssl/misc/CA.pl
 %postun -p /sbin/ldconfig
 
 %files 
-%{_prefix}/bin
+%{_prefix}/bin/*
 %{_prefix}/ssl
 %{_libdir}/engines/*.so
 %{_libdir}/libcrypto.so.%{soversion}
