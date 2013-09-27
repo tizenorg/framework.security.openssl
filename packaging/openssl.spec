@@ -50,6 +50,8 @@ make all
 # Install OpenSSL.
 make INSTALL_PREFIX=$RPM_BUILD_ROOT install
 rm -rf %{buildroot}/usr/ssl/man
+mkdir -p %{buildroot}/usr/share/license
+cp LICENSE %{buildroot}/usr/share/license/%{name}
 
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
@@ -66,6 +68,7 @@ rm -rf %{buildroot}/usr/ssl/man
 %{_libdir}/engines/*.so
 %{_libdir}/libcrypto.so.%{soversion}
 %{_libdir}/libssl.so.%{soversion}
+/usr/share/license/%{name}
 
 %files devel
 %manifest openssl.manifest
