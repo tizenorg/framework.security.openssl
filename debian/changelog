@@ -1,0 +1,134 @@
+openssl (1.0.1f_2) unstable; urgency=low
+
+  * Applied OBS policy
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1f_2
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Wed, 05 Mar 2014 16:40:38 +0900
+
+openssl (1.0.1f_1) unstable; urgency=low
+
+  * Updated to upstream 1.0.1f
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1f_1
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Tue, 14 Jan 2014 13:38:37 +0900
+
+openssl (1.0.1e_3) unstable; urgency=low
+
+  * Applied patch to set cipher suites length of TLSv1 client hello to 50 bytes
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1e_3
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Mon, 30 Dec 2013 20:13:26 +0900
+
+openssl (1.0.1c-3) unstable; urgency=low
+
+  * Removed manual set for cipher suites length of client hello
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1c-3
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Fri, 04 Jan 2013 19:38:52 +0900
+
+openssl (1.0.1c-2) unstable; urgency=low
+
+  * Applied fixed cipher suites length option to solve old ssl server hang by big size of client hello
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1c-2
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Fri, 07 Dec 2012 18:08:13 +0900
+
+openssl (1.0.1c-1) unstable; urgency=low
+
+  * update to upstream 1.0.1c
+  * removed perl dependency
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1c-1
+
+ -- Tomasz Swierczek <t.swierczek@samsung.com>  Fri, 19 Oct 2012 15:40:00 +0100
+
+openssl (1.0.0f-1) unstable; urgency=low
+
+  * update version - fix some security vulnerabilities
+  * Git: slp/unmodified/openssl
+  * Tag: openssl_1.0.0f-1
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Tue, 10 Jan 2012 15:15:59 +0900
+
+openssl (1.0.0e-6) unstable; urgency=low
+
+  * 11/12/21
+  *  - remove unnecessary file - debian/copyright
+  * Git: slp/unmodified/openssl
+  * Tag: openssl_1.0.0e-6
+
+ -- Kidong Kim <kd0228.kim@samsung.com>  Wed, 21 Dec 2011 11:32:37 +0900
+
+openssl (1.0.0e-5) unstable; urgency=low
+
+  * changelog update
+  * Git: 165.213.180.234:slp/unmodified/openssl
+  * Tag: openssl_1.0.0e-5
+
+ -- Howon Jung <howon.jung@samsung.com>  Tue, 22 Nov 2011 19:12:35 +0900
+
+openssl (1.0.0e-4) unstable; urgency=low
+
+  * changelog update
+  * Git: 165.213.180.234:slp/unmodified/openssl
+  * Tag: openssl_1.0.0e-4
+
+ -- Howon Jung <howon.jung@samsung.com>  Tue, 22 Nov 2011 16:28:06 +0900
+
+openssl (1.0.0e-3) unstable; urgency=low
+
+  * changelog update
+  * Git: 165.213.180.234:slp/unmodified/openssl
+  * Tag: openssl_1.0.0e-3 
+
+ -- Howon Jung <howon.jung@samsung.com>  Tue, 22 Nov 2011 16:09:53 +0900
+
+openssl (1.0.0e-2) unstable; urgency=low
+
+  * Enable the md2 cipher
+
+ -- Mike McCormack <mj.mccormack@samsung.com>  Fri, 16 Sep 2011 11:45:19 +0900
+
+openssl (1.0.0e-1) unstable; urgency=low
+
+  * Upgrade to 1.0.0e
+
+ -- Mike McCormack <mj.mccormack@samsung.com>  Wed, 14 Sep 2011 12:06:40 +0900
+
+openssl (0.9.8s-5) unstable; urgency=low
+
+  * upgrade
+  * tweak build and packaging
+  * Git: 165.213.180.234:slp/unmodified/openssl
+  * Tag: openssl_0.9.8s-5
+
+ -- Mike McCormack <mj.mccormack@samsung.com>  Fri, 03 Dec 2010 11:26:01 +0900
+
+openssl (0.9.8i-4) unstable; urgency=low
+
+  * remove .git directory
+
+ -- Semun Lee <semun.lee@samsung.com>  Fri, 20 Nov 2009 16:03:43 +0900
+
+openssl (0.9.8i-3) unstable; urgency=low
+
+  * add shlibs
+
+ -- Semun Lee <semun.lee@samsung.com>  Mon, 16 Nov 2009 11:30:22 +0900
+
+openssl (0.9.8i-2) unstable; urgency=low
+
+  * fix dev package not to install *.so files
+
+ -- Semun Lee <semun.lee@samsung.com>  Fri, 13 Nov 2009 09:28:22 +0900
+
+openssl (0.9.8i) unstable; urgency=low
+
+  * Initial Release.
+
+ -- unknown <semun.lee@samsung.com>  Thu, 12 Nov 2009 11:02:22 +0900
