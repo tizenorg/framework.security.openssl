@@ -15,8 +15,8 @@ GENERAL=Makefile
 TEST=
 #Tizen patch - remove perl dependency
 #APPS= c_rehash
-APPS=
 #MISC_APPS= c_hash c_info c_issuer c_name
+APPS=
 MISC_APPS=
 
 all:

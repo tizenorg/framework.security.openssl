@@ -1,3 +1,11 @@
+openssl (1.0.1g_1) unstable; urgency=low
+
+  * Upgraded to upstream 1.0.1g to fix heartbleed bug
+  * Git: framework/security/openssl
+  * Tag: openssl_1.0.1g_1
+
+ -- Taeksu Shin <taeksu.shin@samsung.com>  Mon, 14 Apr 2014 10:54:05 +0900
+
 openssl (1.0.1f_2) unstable; urgency=low
 
   * Applied OBS policy

@@ -2,7 +2,7 @@
 %define _unpackaged_files_terminate_build 0
 
 Name:           openssl
-Version:        1.0.1g_1
+Version:        1.0.1k
 Release:        1
 Summary:        A general purpose cryptography library with TLS implementation
 
@@ -39,8 +39,28 @@ cp %{SOURCE1001} .
 # Configure the build tree.  Override OpenSSL defaults with known-good defaults
 # usable on all platforms.  The Configure script already knows to use -fPIC and
 # RPM_OPT_FLAGS, so we can skip specifiying them here.
-./Configure shared \
-	--prefix=%{_prefix} --install-prefix=$RPM_BUILD_ROOT linux-generic32 -ldl -no-asm enable-md2 no-idea no-camellia no-rc5
+
+# Build the "Fips capable" openssl libraries.
+cd openssl-fips/
+
+./config no-asm
+make
+make install INSTALLTOP=$PWD/../fips
+cd ..
+
+BINARY_FORMAT=armv4
+
+%ifarch %{ix86}
+BINARY_FORMAT=generic32
+%endif
+
+%ifarch x86_64
+BINARY_FORMAT=x86_64
+%endif
+
+# Build the "Fips capable" openssl libraries.
+./Configure fips shared \
+	--with-fipsdir=$PWD/fips --prefix=%{_prefix} --libdir=%{_lib} --install-prefix=$RPM_BUILD_ROOT linux-$BINARY_FORMAT -ldl no-asm enable-md2 no-idea no-camellia no-rc5
 
 make depend
 
