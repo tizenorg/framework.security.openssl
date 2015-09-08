@@ -13,8 +13,11 @@ CFLAGS= $(INCLUDES) $(CFLAG)
 
 GENERAL=Makefile
 TEST=
-APPS= c_rehash
-MISC_APPS= c_hash c_info c_issuer c_name
+#Tizen patch - remove perl dependency
+#APPS= c_rehash
+#MISC_APPS= c_hash c_info c_issuer c_name
+APPS=
+MISC_APPS=
 
 all:
 
@@ -43,6 +46,8 @@ lint:
 tags:
 
 errors:
+
+update: depend
 
 depend:
 

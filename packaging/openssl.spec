@@ -1,17 +1,17 @@
 %define soversion 1.0.0
+%define _unpackaged_files_terminate_build 0
 
-Summary: A general purpose cryptography library with TLS implementation
-Name: openssl
-Version: 1.0.0f
-Release: 1
+Name:           openssl
+Version:        1.0.1p
+Release:        1
+Summary:        A general purpose cryptography library with TLS implementation
 
-Source: openssl-%{version}.tar.gz
+Source:         openssl-%{version}.tar.gz
+Source1001:     packaging/openssl.manifest
 
-License: OpenSSL
-Group: System/Libraries
-URL: http://www.openssl.org/
-BuildRequires: mktemp, sed, zlib-devel, util-linux
-Requires: /bin/mktemp
+License:        OpenSSL
+Url:            http://www.openssl.org/
+Group:          System/Libraries
 
 %description
 The OpenSSL toolkit provides support for secure communications between
@@ -20,55 +20,87 @@ libraries which provide various cryptographic algorithms and
 protocols.
 
 %package devel
-Summary: Files for development of applications which will use OpenSSL
-Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}, zlib-devel
-Requires: pkgconfig
+Summary:        Files for development of applications which will use OpenSSL
+Group:          Development/Libraries
+Requires:       %{name} = %{version}
 
 %description devel
 OpenSSL is a toolkit for supporting cryptography. The openssl-devel
 package contains include files needed to develop applications which
 support various cryptographic algorithms and protocols.
 
+
 %prep
 %setup -q
 
-%build 
-
+%build
+cp %{SOURCE1001} .
 # ia64, x86_64, ppc, ppc64 are OK by default
 # Configure the build tree.  Override OpenSSL defaults with known-good defaults
 # usable on all platforms.  The Configure script already knows to use -fPIC and
 # RPM_OPT_FLAGS, so we can skip specifiying them here.
-./Configure shared \
-	--prefix=%{_prefix} --install-prefix=$RPM_BUILD_ROOT linux-generic32 -ldl -no-asm
+
+# Build the "Fips capable" openssl libraries.
+cd openssl-fips/
+
+chmod +x ./config
+./config no-asm
+make
+make install INSTALLTOP=$PWD/../fips
+cd ..
+
+BINARY_FORMAT=armv4
+
+%ifarch %{ix86}
+BINARY_FORMAT=generic32
+%endif
+
+%ifarch x86_64
+BINARY_FORMAT=x86_64
+%endif
+
+# Build the "Fips capable" openssl libraries.
+./Configure fips shared \
+    --with-fipsdir=$PWD/fips --prefix=%{_prefix} --libdir=%{_lib} --install-prefix=$RPM_BUILD_ROOT linux-$BINARY_FORMAT -ldl no-asm enable-md2 no-idea no-camellia no-rc5
 
 make depend
+
+# add '-g' flag to make debug symbol
+find -name "Makefile" -exec sed -i "s#\-O[0-3]#& -g#g" {} \;
+
 make all
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 # Install OpenSSL.
 make INSTALL_PREFIX=$RPM_BUILD_ROOT install
-
 rm -rf %{buildroot}/usr/ssl/man
-rm -rf %{buildroot}/usr/lib/*.a
-rm -rf %{buildroot}/usr/ssl/misc/CA.pl
+rm -rf %{buildroot}/usr/share/
+mkdir -p %{buildroot}/usr/share/license
+cp LICENSE %{buildroot}/usr/share/license/%{name}
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 
 %post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
-%files 
-%{_prefix}/bin
+%files
+%manifest openssl.manifest
+%defattr(-,root,root,-)
+%{_prefix}/bin/openssl
 %{_prefix}/ssl
 %{_libdir}/engines/*.so
 %{_libdir}/libcrypto.so.%{soversion}
 %{_libdir}/libssl.so.%{soversion}
+/usr/share/license/%{name}
 
 %files devel
-/usr/include/openssl/*
+%manifest openssl.manifest
+%defattr(-,root,root,-)
+%{_prefix}/include/openssl
+%attr(0644,root,root) %{_libdir}/*.a
 %attr(0755,root,root) %{_libdir}/*.so
 %attr(0644,root,root) %{_libdir}/pkgconfig/*.pc
-
 

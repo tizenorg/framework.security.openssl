@@ -66,6 +66,9 @@ LIBCOMPATVERSIONS=
 # dependencies to other libraries.
 LIBDEPS=
 
+# Tizen patch - Apply ASLR
+TIZEN_ASLR_LDFLAG= -pie
+
 #------------------------------------------------------------------------------
 # The rest is private to this makefile.
 
@@ -92,7 +95,7 @@ CALC_VERSIONS=	\
 LINK_APP=	\
   ( $(SET_X);   \
     LIBDEPS="$${LIBDEPS:-$(LIBDEPS)}"; \
-    LDCMD="$${LDCMD:-$(CC)}"; LDFLAGS="$${LDFLAGS:-$(CFLAGS)}"; \
+    LDCMD="$${LDCMD:-$(CC)}"; LDFLAGS="$${LDFLAGS:-$(CFLAGS) $(TIZEN_ASLR_LDFLAG)}"; \
     LIBPATH=`for x in $$LIBDEPS; do echo $$x; done | sed -e 's/^ *-L//;t' -e d | uniq`; \
     LIBPATH=`echo $$LIBPATH | sed -e 's/ /:/g'`; \
     LD_LIBRARY_PATH=$$LIBPATH:$$LD_LIBRARY_PATH \
@@ -153,7 +156,7 @@ DO_GNU_SO=$(CALC_VERSIONS); \
 	NOALLSYMSFLAGS='-Wl,--no-whole-archive'; \
 	SHAREDFLAGS="$(CFLAGS) $(SHARED_LDFLAGS) -shared -Wl,-Bsymbolic -Wl,-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX"
 
-DO_GNU_APP=LDFLAGS="$(CFLAGS) -Wl,-rpath,$(LIBRPATH)"
+DO_GNU_APP=LDFLAGS="$(CFLAGS) -Wl,-rpath,$(LIBRPATH) $(TIZEN_ASLR_LDFLAG)"
 
 #This is rather special.  It's a special target with which one can link
 #applications without bothering with any features that have anything to
