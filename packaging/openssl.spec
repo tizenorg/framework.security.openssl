@@ -2,7 +2,7 @@
 %define _unpackaged_files_terminate_build 0
 
 Name:           openssl
-Version:        1.0.1p
+Version:        1.0.1s
 Release:        1
 Summary:        A general purpose cryptography library with TLS implementation
 
